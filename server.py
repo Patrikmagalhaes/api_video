@@ -14,9 +14,12 @@ def download_audio():
         return jsonify({'error': 'URL is required'}), 400
 
     try:
+        # Adicione seu PoToken e visitorData aqui
+        po_token = "MnQqw8U3k-pFVyr7KDYFFGvR68DFYckizyW2mUD8LdJYnJ5ErLuoHaTvSwLg2ZMPsCKW0_u4oGEbuJy73hI4p6sd6eDWfaG70GH0H_2yO2zb4km3p8oRLHURSvsQlkrlTMwkJ071Qsw9hXzM-Ey4mxiyzIAMtg=="  # Substitua com o seu PoToken
+        visitor_data = "Cgs2Uk1hMTg1b21ERSiekey2BjIKCgJCUhIEGgAgZA%3D%3D"
+
         # Baixar o áudio do YouTube
-        yt = YouTube(url, on_progress_callback=on_progress)
-  
+        yt = YouTube(url, use_po_token=True, po_token=po_token, visitor_data=visitor_data, on_progress_callback=on_progress)
 
         # Obter a stream de áudio de menor qualidade
         audio_streams = yt.streams.filter(only_audio=True).order_by('bitrate')  # Ordena pela taxa de bits
